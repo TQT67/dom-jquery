@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Todo list</h1>
+    <ul>
+        <li>Buy groceries</li>
+        <li>Feed the cat</li>
+        <li>Do laundry</li>
+    </ul>
+    <script>
+        // Chèn phần tử vào dom
+        const todoList = document.querySelector("ul");
+        const newTodo = document.createElement("li");
+        newTodo.textContent = "Do homework";
+        todoList.appendChild(newTodo);
+        // Chèn một phần tử ở trước một phần tử đã tồn tại
+        const anotherTodo = document.createElement("li");
+        anotherTodo.textContent = "Pay bills";
+        todoList.insertBefore(anotherTodo, todoList.firstElementChild);
+        // Thay thế một phần tử
+        const modifiedTodo = document.createElement("li");
+        modifiedTodo.textContent = "Feed the dog";
+        todoList.replaceChild(modifiedTodo, todoList.children[2]);
+        // Xóa một phần tử
+        todoList.children[1].remove();
+    </script>
+</body>
+
+</html>
