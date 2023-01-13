@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tính khoản vay ngân hàng</title>
+    <style>
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: inline-block;
+            width: 150px;
+            text-align: right;
+            padding: 5px 10px;
+        }
+        
+        .input-group input {
+            display: inline-block;
+            width: 150px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <form>
+        <h2>Nhập thông tin khoản vay:</h2>
+        <div class="input-group">
+            <label for="">Số tiền vay:</label>
+            <input type="number" name="amount" id="amount" />
+        </div>
+        <div class="input-group">
+            <label for="">Lãi suất năm:</label> <input type="number" name="interest" id="interest" />
+        </div>
+        <div class="input-group">
+            <label for="">Thời gian trả (năm):</label>
+            <input type="number" name="timetopay" id="timetopay" />
+        </div>
+        <div class="input-group">
+            <input type="button" value="Tính" id="calculate" />
+        </div>
+        <h2>Thông tin thanh toán :</h2>
+        <div class="input-group">
+            <label for="">Số tiền phải trả hàng tháng:</label>
+            <input type="text" name="monthlypayment" id="monthlypayment" disabled />
+        </div>
+        <div class="input-group">
+            <label for=""> Tổng số tiền phải trả:</label>
+            <input type="text" name="totalpayment" id="totalpayment" disabled />
+        </div>
+        <div class="input-group">
+            <label for="">Tổng số lãi phải trả:</label>
+            <input type="text" name="totalinterest" id="totalinterest" disabled />
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("calculate").onclick = function() {
+            let amount = document.getElementById("amount").value;
+            let interest = document.getElementById("interest").value;
+            let timetopay = document.getElementById("timetopay").value;
+            //Chuyển đổi lãi suất từ ​​phần trăm sang số thập phân
+            interest = interest / 100;
+            //Chuyển đổi từ lãi suất hàng năm sang lãi suất hàng tháng
+            let monthlyInterest = interest / 12;
+            //Chuyển đổi thời gian trả theo năm thành số tháng
+            let payments = timetopay * 12;
+            //Công thức tính Số tiền phải trả hàng tháng
+            let x = Math.pow(1 + monthlyInterest, payments);
+            let monthlyPayment = (amount * x * monthlyInterest) / (x - 1);
+            //Công thức tính Tổng số tiền phải trả
+            let totalPayment = monthlyPayment * payments;
+            //Công thức tính Tổng số lãi phải trả
+            let totalInterest = totalPayment - amount;
+            //Hiển thị kết quả
+            document.getElementById("monthlypayment").value = monthlyPayment;
+            document.getElementById("totalpayment").value = totalPayment;
+            document.getElementById("totalinterest").value = totalInterest;
+        };
+    </script>
+</body>
+
+</html>
