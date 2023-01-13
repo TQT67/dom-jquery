@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đo chỉ số BMI</title>
+</head>
+
+<body>
+    <h1>Đo chỉ số BMI</h1>
+    <label>Chiều cao:</label>
+    <input type="text" id="height" placeholder="Tính theo m" />
+    <br /><br />
+    <label>Cân nặng:</label>
+    <input type="text" id="weight" placeholder="Tính theo kg" />
+    <br /><br />
+    <label>Giới tính:</label>
+    <br /><br />
+    <input id="gender" type="radio" name="gender" value="male" /> Nam
+    <input id="gender" type="radio" name="gender" value="female" /> Nữ <br /><br />
+    <button onclick="calculateBMI()">Tính BMI</button>
+    <br /><br />
+    <div id="output"></div>
+
+    <script>
+        function calculateBMI() {
+            let weight = document.getElementById("weight").value;
+            let height = document.getElementById("height").value;
+            let gender = document.getElementById("gender").value;
+            let BMI = weight / (height * height);
+            let status;
+            if (gender == "male") {
+                if (BMI < 20.7) {
+                    status = "Gầy";
+                } else if (BMI >= 20.7 && BMI <= 26.4) {
+                    status = "Bình thường";
+                } else if (BMI > 26.4 && BMI <= 27.8) {
+                    status = "Thừa cân nhẹ";
+                } else if (BMI > 27.8 && BMI <= 31.1) {
+                    status = "Trên lý tưởng";
+                } else if (BMI > 31.1) {
+                    status = "Béo phì";
+                }
+            } else {
+                if (BMI < 19.1) {
+                    status = "Gầy";
+                } else if (BMI >= 19.1 && BMI <= 25.8) {
+                    status = "Bình thường";
+                } else if (BMI > 25.8 && BMI <= 27.3) {
+                    status = "Thừa cân nhẹ";
+                } else if (BMI > 27.3 && BMI <= 32.3) {
+                    status = "Trên lý tưởng";
+                } else if (BMI > 32.3) {
+                    status = "Béo phì";
+                }
+            }
+            document.getElementById("output").innerHTML = " " + BMI + " / " + status;
+        }
+    </script>
+</body>
+
+</html>
